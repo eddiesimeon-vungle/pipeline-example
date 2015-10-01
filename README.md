@@ -1,5 +1,5 @@
 # pipeline-example
-[![Build Status](http://jenkins.vungle.com:8080/buildStatus/icon?job=pullrequest-pipeline-example)](http://jenkins.vungle.com:8080/view/system-integration/view/system-integration-jobs/job/pullrequest-pipeline-example/)
+[![Build Status](http://jenkins.vungle.com:8080/buildStatus/icon?job=si-pipeline-example-master)](http://jenkins.vungle.com:8080/view/system-integration/view/si-pipeline-example/job/si-pipeline-example-master/)
 
 ## Local Setup
 ### build image locally
