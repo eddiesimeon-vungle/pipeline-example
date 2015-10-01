@@ -21,6 +21,12 @@ then
   echo "env variable DOCKERHUB_TAG not defined. using default value $DOCKERHUB_TAG"
 fi
 
+if [ -z $PX ]
+then
+  PX=PX
+  echo "env variable PX not defined. using default value $PX"
+fi
+
 build ()
 {
   docker build -t $DOCKERHUB_PATH:$DOCKERHUB_TAG . || SUCCESS=false
@@ -28,18 +34,18 @@ build ()
 
 cleanup ()
 {
-  docker rm -f -v pipeline-example || true
+  docker rm -f -v ${PX}_pipeline-example || true
 }
 
 startcontainers ()
 {
   cleanup
-  docker run --name=pipeline-example -d $DOCKERHUB_PATH:$DOCKERHUB_TAG /bin/sh -c "cd /opt/pipeline-example;node app/server.js" || SUCCESS=false
+  docker run --name=${PX}_pipeline-example -d $DOCKERHUB_PATH:$DOCKERHUB_TAG /bin/sh -c "cd /opt/pipeline-example;node app/server.js" || SUCCESS=false
 }
 
 runtests ()
 {
-  docker exec pipeline-example /bin/sh -c "cd /opt/pipeline-example;npm test" || SUCCESS=false
+  docker exec ${PX}_pipeline-example /bin/sh -c "cd /opt/pipeline-example;npm test" || SUCCESS=false
 }
 
 tag ()
